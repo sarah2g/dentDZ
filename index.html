@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+<script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+         body {
+        font-family: 'Tajawal', sans-serif;
+        background-color: #f8fafc;
+    }
+    
+    body.ltr {
+        font-family: 'Poppins', sans-serif;
+        direction: ltr;
+    }
+    
+    .calendar-day {
+        transition: all 0.2s;
+    }
+    
+    .calendar-day:hover:not(.disabled) {
+        background-color: #e0f2fe;
+        transform: scale(1.05);
+    }
+    
+    .time-slot {
+        transition: all 0.2s;
+    }
+    
+    .time-slot:hover:not(.disabled) {
+        background-color: #e0f2fe;
+        transform: scale(1.05);
+    }
+    
+    .testimonial-card {
+        transition: all 0.3s;
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    </style>
+</head>
+<body>
+   <header class="bg-white shadow-sm py-4 px-6">
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+
+      <div class="flex items-center mb-3 md:mb-0">
+                <div class="text-gray-700 rtl:ml-4 ltr:mr-4">
+                    <i class="fas fa-phone-alt rtl:ml-1 ltr:mr-1"></i>
+                    <span>0555 123 456</span>
+                </div>
+                <div class="text-gray-700 rtl:mr-4 ltr:ml-4">
+                    <i class="fas fa-phone-alt rtl:ml-1 ltr:mr-1"></i>
+                    <span>0666 789 012</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center">
+                <button id="bookingBtn" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg transition duration-300 rtl:ml-4 ltr:mr-4">
+                    <i class="far fa-calendar-check rtl:ml-1 ltr:mr-1"></i> <span data-translate="book-appointment">حجز موعد</span>
+                </button>
+                
+                <div class="relative rtl:mr-4 ltr:ml-4">
+                    <button id="languageBtn" class="flex items-center text-gray-700 hover:text-teal-600 transition">
+                        <i class="fas fa-globe rtl:ml-1 ltr:mr-1"></i>
+                        <span id="currentLang" data-translate="current-lang">العربية</span>
+                        <i class="fas fa-chevron-down rtl:mr-1 ltr:ml-1 text-xs"></i>
+                    </button>
+                    <div id="languageDropdown" class="absolute rtl:left-0 ltr:right-0 mt-2 w-32 bg-white rounded-md shadow-lg hidden z-10">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-md" data-lang="ar">العربية</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="fr">Français</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-md" data-lang="en">English</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="py-12 bg-gradient-to-b from-teal-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-translate="hero-title">ابتسامة صحية، حياة سعيدة</h2>
+                    <p class="text-lg text-gray-600 mb-6" data-translate="hero-subtitle">نقدم لكم أفضل خدمات طب الأسنان في الجزائر بأحدث التقنيات وفريق طبي متخصص</p>
+                    <button id="heroBookingBtn" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg text-lg transition duration-300">
+                        <span data-translate="book-now">احجز موعدك الآن</span>
+                    </button>
+                </div>
+<div class="md:w-1/2">
+    <div class="bg-white p-2 rounded-lg shadow-lg">
+        <img src="image/logo pour un dentiste _DentDZ.jpg" alt="logo" class="w-full h-auto rounded-lg" />
+    </div>
+</div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-translate="our-services">خدماتنا</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 border-t-4 border-teal-500">
+                    <div class="text-teal-600 text-3xl mb-4">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="service-cleaning">تنظيف الأسنان</h3>
+                    <p class="text-gray-600" data-translate="service-cleaning-desc">تنظيف احترافي للأسنان لإزالة الجير والبلاك وتلميع الأسنان للحصول على ابتسامة صحية.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 border-t-4 border-teal-500">
+                    <div class="text-teal-600 text-3xl mb-4">
+                        <i class="fas fa-teeth"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="service-orthodontics">تقويم الأسنان</h3>
+                    <p class="text-gray-600" data-translate="service-orthodontics-desc">تقويم الأسنان بأحدث التقنيات لتصحيح وضعية الأسنان والحصول على إطلالة متناسقة.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 border-t-4 border-teal-500">
+                    <div class="text-teal-600 text-3xl mb-4">
+                        <i class="fas fa-teeth-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="service-filling">حشو الأسنان</h3>
+                    <p class="text-gray-600" data-translate="service-filling-desc">معالجة تسوس الأسنان وحشوها بمواد عالية الجودة تدوم لفترة طويلة.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 border-t-4 border-teal-500">
+                    <div class="text-teal-600 text-3xl mb-4">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="service-whitening">تبييض الأسنان</h3>
+                    <p class="text-gray-600" data-translate="service-whitening-desc">تبييض الأسنان باستخدام تقنيات آمنة وفعالة للحصول على ابتسامة أكثر إشراقاً.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 border-t-4 border-teal-500">
+                    <div class="text-teal-600 text-3xl mb-4">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="service-extraction">خلع الأسنان</h3>
+                    <p class="text-gray-600" data-translate="service-extraction-desc">خلع الأسنان والضروس بطرق آمنة وبأقل ألم ممكن مع رعاية ما بعد الخلع.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 border-t-4 border-teal-500">
+                    <div class="text-teal-600 text-3xl mb-4">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2" data-translate="service-consultation">استشارات طبية</h3>
+                    <p class="text-gray-600" data-translate="service-consultation-desc">استشارات متخصصة في صحة الفم والأسنان مع خطط علاجية مخصصة لكل حالة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Working Hours -->
+    <section class="py-16 bg-teal-50">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center" data-translate="working-hours">أوقات العمل</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center">
+                    <div class="text-teal-600 text-5xl mb-4 md:mb-0 rtl:md:ml-8 ltr:md:mr-8">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="text-center rtl:md:text-right ltr:md:text-left">
+                        <p class="text-lg text-gray-700 mb-2" data-translate="working-days">من السبت إلى الخميس</p>
+                        <p class="text-xl font-bold text-teal-700" data-translate="working-time">9:00 صباحاً - 5:00 مساءً</p>
+                        <p class="text-gray-500 mt-2" data-translate="closed-days">الجمعة: مغلق</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-translate="testimonials">آراء المرضى</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white rounded-lg shadow-md p-6 rtl:border-r-4 ltr:border-l-4 border-teal-500">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 rounded-full p-2 rtl:ml-3 ltr:mr-3">
+                            <span class="text-teal-600 text-xl">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800" data-translate="testimonial-name-1">سمير بن علي</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600" data-translate="testimonial-text-1">"تجربة ممتازة مع الدكتور محمد. كنت خائفاً من علاج الأسنان لكن الدكتور كان لطيفاً جداً وشرح لي كل خطوة. أنصح به بشدة!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white rounded-lg shadow-md p-6 rtl:border-r-4 ltr:border-l-4 border-teal-500">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 rounded-full p-2 rtl:ml-3 ltr:mr-3">
+                            <span class="text-teal-600 text-xl">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800" data-translate="testimonial-name-2">ليلى مرزوقي</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600" data-translate="testimonial-text-2">"قمت بتركيب تقويم أسنان منذ سنة، والنتائج مذهلة! العيادة نظيفة جداً والطاقم محترف. سعيدة جداً بالنتيجة."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white rounded-lg shadow-md p-6 rtl:border-r-4 ltr:border-l-4 border-teal-500">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 rounded-full p-2 rtl:ml-3 ltr:mr-3">
+                            <span class="text-teal-600 text-xl">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800" data-translate="testimonial-name-3">كريم بوزيد</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600" data-translate="testimonial-text-3">"أفضل طبيب أسنان زرته! عملية تبييض الأسنان كانت سريعة وغير مؤلمة، والنتيجة رائعة. أشكر الدكتور محمد وفريقه على الاهتمام والرعاية."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location -->
+    <section id="location" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-translate="our-location">موقعنا</h2>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="h-96 w-full">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102888.38256419889!2d3.0124282!3d36.7538259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb26977ea659f%3A0x128fb3686e9aee73!2z2KfZhNis2LLYp9im2LEg2KfZhNi52KfYtdmF2Kk!5e0!3m2!1sar!2sdz!4v1652345678901!5m2!1sar!2sdz" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-map-marker-alt text-teal-600 rtl:ml-2 ltr:mr-2"></i>
+                        <p class="text-gray-700" data-translate="address">شارع ديدوش مراد، الجزائر العاصمة</p>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone-alt text-teal-600 rtl:ml-2 ltr:mr-2"></i>
+                        <p class="text-gray-700">0555 123 456 / 0666 789 012</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Booking Modal -->
+<div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800" data-translate="booking-title">حجز موعد</h2>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700 transition">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            <form id="bookingForm" class="space-y-6">
+                <!-- Personal Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="fullName" class="block text-gray-700 font-medium mb-2" data-translate="full-name">الاسم الكامل <span class="text-red-500">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block text-gray-700 font-medium mb-2" data-translate="phone-number">رقم الهاتف <span class="text-red-500">*</span></label>
+                        <input type="tel" id="phone" name="phone" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label for="email" class="block text-gray-700 font-medium mb-2" data-translate="email">البريد الإلكتروني (اختياري)</label>
+                        <input type="email" id="email" name="email"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                </div>
+                
+                <!-- Service Selection -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2" data-translate="select-service">اختر الخدمة <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-teal-50 transition">
+                            <input type="radio" name="service" value="تنظيف الأسنان" class="rtl:ml-2 ltr:mr-2 text-teal-600 focus:ring-teal-500" required>
+                            <span data-translate="service-cleaning">تنظيف الأسنان</span>
+                        </label>
+                        
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-teal-50 transition">
+                            <input type="radio" name="service" value="استشارة" class="rtl:ml-2 ltr:mr-2 text-teal-600 focus:ring-teal-500">
+                            <span data-translate="service-consultation-short">استشارة</span>
+                        </label>
+                        
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-teal-50 transition">
+                            <input type="radio" name="service" value="تقويم الأسنان" class="rtl:ml-2 ltr:mr-2 text-teal-600 focus:ring-teal-500">
+                            <span data-translate="service-orthodontics">تقويم الأسنان</span>
+                        </label>
+                        
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-teal-50 transition">
+                            <input type="radio" name="service" value="تبييض الأسنان" class="rtl:ml-2 ltr:mr-2 text-teal-600 focus:ring-teal-500">
+                            <span data-translate="service-whitening">تبييض الأسنان</span>
+                        </label>
+                        
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-teal-50 transition">
+                            <input type="radio" name="service" value="خلع ضرس" class="rtl:ml-2 ltr:mr-2 text-teal-600 focus:ring-teal-500">
+                            <span data-translate="service-extraction-short">خلع ضرس</span>
+                        </label>
+                        
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-teal-50 transition">
+                            <input type="radio" name="service" value="غير ذلك" class="rtl:ml-2 ltr:mr-2 text-teal-600 focus:ring-teal-500">
+                            <span data-translate="service-other">غير ذلك</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Date Selection -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2" data-translate="select-date">اختر التاريخ <span class="text-red-500">*</span></label>
+                    <div id="calendar" class="border border-gray-300 rounded-lg p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <button type="button" id="prevMonth" class="text-teal-600 hover:text-teal-800 transition">
+                                <i class="fas fa-chevron-right rtl:hidden"></i>
+                                <i class="fas fa-chevron-left ltr:hidden"></i>
+                            </button>
+                            <h3 id="currentMonth" class="text-lg font-bold text-gray-800"></h3>
+                            <button type="button" id="nextMonth" class="text-teal-600 hover:text-teal-800 transition">
+                                <i class="fas fa-chevron-left rtl:hidden"></i>
+                                <i class="fas fa-chevron-right ltr:hidden"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-7 gap-1 text-center mb-2" id="weekdaysHeader">
+                            <!-- Will be filled by JS -->
+                        </div>
+                        
+                        <div id="calendarDays" class="grid grid-cols-7 gap-1"></div>
+                    </div>
+                    <input type="hidden" id="selectedDate" name="selectedDate" required>
+                </div>
+                
+                <!-- Time Selection -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2" data-translate="select-time">اختر الوقت <span class="text-red-500">*</span></label>
+                    <div id="timeSlots" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                        <p class="col-span-full text-gray-500 text-center" data-translate="select-date-first">الرجاء اختيار تاريخ أولاً</p>
+                    </div>
+                    <input type="hidden" id="selectedTime" name="selectedTime" required>
+                </div>
+                
+                <!-- Notes -->
+                <div>
+                    <label for="notes" class="block text-gray-700 font-medium mb-2" data-translate="additional-notes">ملاحظات إضافية (اختياري)</label>
+                    <textarea id="notes" name="notes" rows="3"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition duration-300">
+                        <span data-translate="confirm-booking">تأكيد الحجز</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
+        <div class="text-center">
+            <div class="text-5xl text-teal-600 mb-4">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2" data-translate="booking-success">تم الحجز بنجاح!</h2>
+            <p class="text-gray-600 mb-6" data-translate="booking-confirmation">سيتم إرسال تفاصيل الحجز إلى هاتفك ورسالة تأكيد إلى بريدك الإلكتروني.</p>
+            <div id="bookingDetails" class="bg-teal-50 rounded-lg p-4 rtl:text-right ltr:text-left mb-6">
+                <!-- Booking details will be inserted here -->
+            </div>
+            <button id="closeSuccessModal" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                <span data-translate="close">إغلاق</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <div class="flex items-center">
+                    <div class="text-teal-400 text-2xl rtl:ml-2 ltr:mr-2">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h2 class="text-xl font-bold">DentDZ</h2>
+                </div>
+                <p class="text-gray-400 mt-2" data-translate="clinic-tagline">عيادة طب الأسنان المتميزة</p>
+            </div>
+            
+            <div class="mb-4 md:mb-0">
+                <h3 class="font-bold mb-2" data-translate="contact-us">تواصل معنا</h3>
+                <div class="flex items-center mb-1">
+                    <i class="fas fa-phone-alt rtl:ml-2 ltr:mr-2 text-teal-400"></i>
+                    <span>0555 123 456</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope rtl:ml-2 ltr:mr-2 text-teal-400"></i>
+                    <span>info@dentdz.com</span>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="font-bold mb-2" data-translate="follow-us">تابعنا</h3>
+                <div class="flex rtl:space-x-reverse space-x-4">
+                    <a href="#" class="text-white hover:text-teal-400 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-teal-400 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-teal-400 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+            <p data-translate="copyright">© 2023 DentDZ - جميع الحقوق محفوظة</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Language translations
+    const translations = {
+        ar: {
+            "clinic-name": "DentDZ",
+            "doctor-name": "د. محمد أمين",
+            "book-appointment": "حجز موعد",
+            "current-lang": "العربية",
+            "hero-title": "ابتسامة صحية، حياة سعيدة",
+            "hero-subtitle": "نقدم لكم أفضل خدمات طب الأسنان في الجزائر بأحدث التقنيات وفريق طبي متخصص",
+            "book-now": "احجز موعدك الآن",
+            "our-services": "خدماتنا",
+            "service-cleaning": "تنظيف الأسنان",
+            "service-cleaning-desc": "تنظيف احترافي للأسنان لإزالة الجير والبلاك وتلميع الأسنان للحصول على ابتسامة صحية.",
+            "service-orthodontics": "تقويم الأسنان",
+            "service-orthodontics-desc": "تقويم الأسنان بأحدث التقنيات لتصحيح وضعية الأسنان والحصول على إطلالة متناسقة.",
+            "service-filling": "حشو الأسنان",
+            "service-filling-desc": "معالجة تسوس الأسنان وحشوها بمواد عالية الجودة تدوم لفترة طويلة.",
+            "service-whitening": "تبييض الأسنان",
+            "service-whitening-desc": "تبييض الأسنان باستخدام تقنيات آمنة وفعالة للحصول على ابتسامة أكثر إشراقاً.",
+            "service-extraction": "خلع الأسنان",
+            "service-extraction-desc": "خلع الأسنان والضروس بطرق آمنة وبأقل ألم ممكن مع رعاية ما بعد الخلع.",
+            "service-consultation": "استشارات طبية",
+            "service-consultation-desc": "استشارات متخصصة في صحة الفم والأسنان مع خطط علاجية مخصصة لكل حالة.",
+            "working-hours": "أوقات العمل",
+            "working-days": "من السبت إلى الخميس",
+            "working-time": "9:00 صباحاً - 5:00 مساءً",
+            "closed-days": "الجمعة: مغلق",
+            "testimonials": "آراء المرضى",
+            "testimonial-name-1": "سمير بن علي",
+            "testimonial-text-1": "\"تجربة ممتازة مع الدكتور محمد. كنت خائفاً من علاج الأسنان لكن الدكتور كان لطيفاً جداً وشرح لي كل خطوة. أنصح به بشدة!\"",
+            "testimonial-name-2": "ليلى مرزوقي",
+            "testimonial-text-2": "\"قمت بتركيب تقويم أسنان منذ سنة، والنتائج مذهلة! العيادة نظيفة جداً والطاقم محترف. سعيدة جداً بالنتيجة.\"",
+            "testimonial-name-3": "كريم بوزيد",
+            "testimonial-text-3": "\"أفضل طبيب أسنان زرته! عملية تبييض الأسنان كانت سريعة وغير مؤلمة، والنتيجة رائعة. أشكر الدكتور محمد وفريقه على الاهتمام والرعاية.\"",
+            "our-location": "موقعنا",
+            "address": "شارع ديدوش مراد، الجزائر العاصمة",
+            "booking-title": "حجز موعد",
+            "full-name": "الاسم الكامل <span class=\"text-red-500\">*</span>",
+            "phone-number": "رقم الهاتف <span class=\"text-red-500\">*</span>",
+            "email": "البريد الإلكتروني (اختياري)",
+            "select-service": "اختر الخدمة <span class=\"text-red-500\">*</span>",
+            "service-consultation-short": "استشارة",
+            "service-extraction-short": "خلع ضرس",
+            "service-other": "غير ذلك",
+            "select-date": "اختر التاريخ <span class=\"text-red-500\">*</span>",
+            "select-time": "اختر الوقت <span class=\"text-red-500\">*</span>",
+            "select-date-first": "الرجاء اختيار تاريخ أولاً",
+            "additional-notes": "ملاحظات إضافية (اختياري)",
+            "confirm-booking": "تأكيد الحجز",
+            "booking-success": "تم الحجز بنجاح!",
+            "booking-confirmation": "سيتم إرسال تفاصيل الحجز إلى هاتفك ورسالة تأكيد إلى بريدك الإلكتروني.",
+            "close": "إغلاق",
+            "clinic-tagline": "عيادة طب الأسنان المتميزة",
+            "contact-us": "تواصل معنا",
+            "follow-us": "تابعنا",
+            "copyright": "© 2023 DentDZ - جميع الحقوق محفوظة",
+            "weekdays": ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
+            "months": ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+            "name-label": "الاسم:",
+            "phone-label": "رقم الهاتف:",
+            "email-label": "البريد الإلكتروني:",
+            "service-label": "الخدمة:",
+            "date-label": "التاريخ:",
+            "time-label": "الوقت:",
+            "notes-label": "ملاحظات:"
+        },
+        fr: {
+            "clinic-name": "DentDZ",
+            "doctor-name": "Dr. Mohamed Amine",
+            "book-appointment": "Prendre RDV",
+            "current-lang": "Français",
+            "hero-title": "Un sourire sain, une vie heureuse",
+            "hero-subtitle": "Nous offrons les meilleurs services dentaires en Algérie avec les technologies les plus récentes et une équipe médicale spécialisée",
+            "book-now": "Réservez maintenant",
+            "our-services": "Nos services",
+            "service-cleaning": "Nettoyage dentaire",
+            "service-cleaning-desc": "Nettoyage professionnel des dents pour éliminer le tartre et la plaque et polir les dents pour un sourire sain.",
+            "service-orthodontics": "Orthodontie",
+            "service-orthodontics-desc": "Orthodontie avec les dernières technologies pour corriger la position des dents et obtenir un look harmonieux.",
+            "service-filling": "Obturation dentaire",
+            "service-filling-desc": "Traitement des caries dentaires et obturation avec des matériaux de haute qualité qui durent longtemps.",
+            "service-whitening": "Blanchiment des dents",
+            "service-whitening-desc": "Blanchiment des dents en utilisant des techniques sûres et efficaces pour un sourire plus éclatant.",
+            "service-extraction": "Extraction dentaire",
+            "service-extraction-desc": "Extraction des dents et des molaires en toute sécurité et avec un minimum de douleur, avec des soins post-extraction.",
+            "service-consultation": "Consultations médicales",
+            "service-consultation-desc": "Consultations spécialisées en santé bucco-dentaire avec des plans de traitement personnalisés pour chaque cas.",
+            "working-hours": "Heures d'ouverture",
+            "working-days": "Du samedi au jeudi",
+            "working-time": "9h00 - 17h00",
+            "closed-days": "Vendredi: fermé",
+            "testimonials": "Avis des patients",
+            "testimonial-name-1": "Samir Ben Ali",
+            "testimonial-text-1": "\"Excellente expérience avec Dr. Mohamed. J'avais peur du traitement dentaire mais le docteur était très gentil et m'a expliqué chaque étape. Je le recommande fortement!\"",
+            "testimonial-name-2": "Leila Merzougui",
+            "testimonial-text-2": "\"J'ai installé un appareil dentaire il y a un an, et les résultats sont incroyables! La clinique est très propre et le personnel est professionnel. Je suis très satisfaite du résultat.\"",
+            "testimonial-name-3": "Karim Bouzid",
+            "testimonial-text-3": "\"Le meilleur dentiste que j'ai visité! Le processus de blanchiment des dents était rapide et sans douleur, et le résultat est fantastique. Je remercie Dr. Mohamed et son équipe pour leur attention et leurs soins.\"",
+            "our-location": "Notre emplacement",
+            "address": "Rue Didouche Mourad, Alger",
+            "booking-title": "Prendre rendez-vous",
+            "full-name": "Nom complet <span class=\"text-red-500\">*</span>",
+            "phone-number": "Numéro de téléphone <span class=\"text-red-500\">*</span>",
+            "email": "Email (optionnel)",
+            "select-service": "Sélectionnez le service <span class=\"text-red-500\">*</span>",
+            "service-consultation-short": "Consultation",
+            "service-extraction-short": "Extraction",
+            "service-other": "Autre",
+            "select-date": "Sélectionnez la date <span class=\"text-red-500\">*</span>",
+            "select-time": "Sélectionnez l'heure <span class=\"text-red-500\">*</span>",
+            "select-date-first": "Veuillez d'abord sélectionner une date",
+            "additional-notes": "Notes supplémentaires (optionnel)",
+            "confirm-booking": "Confirmer la réservation",
+            "booking-success": "Réservation réussie!",
+            "booking-confirmation": "Les détails de la réservation seront envoyés à votre téléphone et un message de confirmation à votre email.",
+            "close": "Fermer",
+            "clinic-tagline": "Clinique dentaire d'excellence",
+            "contact-us": "Contactez-nous",
+            "follow-us": "Suivez-nous",
+            "copyright": "© 2023 DentDZ - Tous droits réservés",
+            "weekdays": ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+            "months": ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            "name-label": "Nom:",
+            "phone-label": "Téléphone:",
+            "email-label": "Email:",
+            "service-label": "Service:",
+            "date-label": "Date:",
+            "time-label": "Heure:",
+            "notes-label": "Notes:"
+        },
+        en: {
+            "clinic-name": "DentDZ",
+            "doctor-name": "Dr. Mohamed Amine",
+            "book-appointment": "Book Appointment",
+            "current-lang": "English",
+            "hero-title": "Healthy Smile, Happy Life",
+            "hero-subtitle": "We offer the best dental services in Algeria with the latest technologies and specialized medical team",
+            "book-now": "Book Now",
+            "our-services": "Our Services",
+            "service-cleaning": "Teeth Cleaning",
+            "service-cleaning-desc": "Professional teeth cleaning to remove tartar and plaque and polish teeth for a healthy smile.",
+            "service-orthodontics": "Orthodontics",
+            "service-orthodontics-desc": "Orthodontics with the latest technologies to correct teeth position and get a harmonious look.",
+            "service-filling": "Dental Filling",
+            "service-filling-desc": "Treatment of dental caries and filling with high-quality materials that last for a long time.",
+            "service-whitening": "Teeth Whitening",
+            "service-whitening-desc": "Teeth whitening using safe and effective techniques for a brighter smile.",
+            "service-extraction": "Tooth Extraction",
+            "service-extraction-desc": "Extraction of teeth and molars safely and with minimal pain, with post-extraction care.",
+            "service-consultation": "Medical Consultations",
+            "service-consultation-desc": "Specialized consultations in oral and dental health with customized treatment plans for each case.",
+            "working-hours": "Working Hours",
+            "working-days": "Saturday to Thursday",
+            "working-time": "9:00 AM - 5:00 PM",
+            "closed-days": "Friday: Closed",
+            "testimonials": "Patient Reviews",
+            "testimonial-name-1": "Samir Ben Ali",
+            "testimonial-text-1": "\"Excellent experience with Dr. Mohamed. I was afraid of dental treatment but the doctor was very kind and explained every step to me. I highly recommend him!\"",
+            "testimonial-name-2": "Leila Merzougui",
+            "testimonial-text-2": "\"I had braces installed a year ago, and the results are amazing! The clinic is very clean and the staff is professional. I'm very happy with the result.\"",
+            "testimonial-name-3": "Karim Bouzid",
+            "testimonial-text-3": "\"The best dentist I've visited! The teeth whitening process was quick and painless, and the result is fantastic. I thank Dr. Mohamed and his team for their attention and care.\"",
+            "our-location": "Our Location",
+            "address": "Didouche Mourad Street, Algiers",
+            "booking-title": "Book Appointment",
+            "full-name": "Full Name <span class=\"text-red-500\">*</span>",
+            "phone-number": "Phone Number <span class=\"text-red-500\">*</span>",
+            "email": "Email (optional)",
+            "select-service": "Select Service <span class=\"text-red-500\">*</span>",
+            "service-consultation-short": "Consultation",
+            "service-extraction-short": "Extraction",
+            "service-other": "Other",
+            "select-date": "Select Date <span class=\"text-red-500\">*</span>",
+            "select-time": "Select Time <span class=\"text-red-500\">*</span>",
+            "select-date-first": "Please select a date first",
+            "additional-notes": "Additional Notes (optional)",
+            "confirm-booking": "Confirm Booking",
+            "booking-success": "Booking Successful!",
+            "booking-confirmation": "Booking details will be sent to your phone and a confirmation message to your email.",
+            "close": "Close",
+            "clinic-tagline": "Excellence in Dental Care",
+            "contact-us": "Contact Us",
+            "follow-us": "Follow Us",
+            "copyright": "© 2023 DentDZ - All Rights Reserved",
+            "weekdays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            "name-label": "Name:",
+            "phone-label": "Phone:",
+            "email-label": "Email:",
+            "service-label": "Service:",
+            "date-label": "Date:",
+            "time-label": "Time:",
+            "notes-label": "Notes:"
+        }
+    };
+    
+    // Current language
+    let currentLanguage = 'ar';
+    
+    // Function to change language
+    function changeLanguage(lang) {
+        // Update HTML dir attribute
+        document.documentElement.lang = lang;
+        if (lang === 'ar') {
+            document.documentElement.dir = 'rtl';
+            document.body.classList.remove('ltr');
+        } else {
+            document.documentElement.dir = 'ltr';
+            document.body.classList.add('ltr');
+        }
+        
+        // Update all elements with data-translate attribute
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang][key]) {
+                element.innerHTML = translations[lang][key];
+            }
+        });
+        
+        // Update current language
+        currentLanguage = lang;
+        
+        // Update calendar weekdays
+        updateCalendarWeekdays();
+        
+        // Re-render calendar with new language
+        renderCalendar();
+    }
+    
+    // Language Dropdown
+    const languageBtn = document.getElementById('languageBtn');
+    const languageDropdown = document.getElementById('languageDropdown');
+    const currentLang = document.getElementById('currentLang');
+    
+    languageBtn.addEventListener('click', () => {
+        languageDropdown.classList.toggle('hidden');
+    });
+    
+    document.querySelectorAll('#languageDropdown a').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const lang = e.target.dataset.lang;
+            changeLanguage(lang);
+            languageDropdown.classList.add('hidden');
+        });
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!languageBtn.contains(e.target)) {
+            languageDropdown.classList.add('hidden');
+        }
+    });
+    
+    // Booking Modal
+    const bookingBtn = document.getElementById('bookingBtn');
+    const heroBookingBtn = document.getElementById('heroBookingBtn');
+    const closeModal = document.getElementById('closeModal');
+    const bookingModal = document.getElementById('bookingModal');
+    
+    bookingBtn.addEventListener('click', () => {
+        bookingModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    heroBookingBtn.addEventListener('click', () => {
+        bookingModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeModal.addEventListener('click', () => {
+        bookingModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Close modal when clicking outside
+    bookingModal.addEventListener('click', (e) => {
+        if (e.target === bookingModal) {
+            bookingModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Calendar Functionality
+    const calendarDays = document.getElementById('calendarDays');
+    const weekdaysHeader = document.getElementById('weekdaysHeader');
+    const currentMonthElement = document.getElementById('currentMonth');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    const selectedDateInput = document.getElementById('selectedDate');
+    const timeSlots = document.getElementById('timeSlots');
+    const selectedTimeInput = document.getElementById('selectedTime');
+    
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+    
+    // Update calendar weekdays based on language
+    function updateCalendarWeekdays() {
+        weekdaysHeader.innerHTML = '';
+        const weekdays = translations[currentLanguage].weekdays;
+        
+        for (let i = 0; i < 7; i++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'text-sm font-medium text-gray-600';
+            dayElement.textContent = weekdays[i];
+            weekdaysHeader.appendChild(dayElement);
+        }
+    }
+    
+    function renderCalendar() {
+        const firstDay = new Date(currentYear, currentMonth, 1);
+        const lastDay = new Date(currentYear, currentMonth + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        
+        // Update month and year display
+        const monthName = translations[currentLanguage].months[currentMonth];
+        currentMonthElement.textContent = `${monthName} ${currentYear}`;
+        
+        // Clear previous days
+        calendarDays.innerHTML = '';
+        
+        // Add empty cells for days before the first day of the month
+        let firstDayOfWeek = firstDay.getDay();
+        // Adjust for Arabic calendar (week starts on Saturday)
+        if (currentLanguage === 'ar') {
+            firstDayOfWeek = (firstDayOfWeek === 0) ? 6 : firstDayOfWeek - 1;
+        }
+        
+        for (let i = 0; i < firstDayOfWeek; i++) {
+            const emptyDay = document.createElement('div');
+            calendarDays.appendChild(emptyDay);
+        }
+        
+        // Add days of the month
+        const today = new Date();
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement('div');
+            const date = new Date(currentYear, currentMonth, day);
+            
+            dayElement.textContent = day;
+            dayElement.classList.add('calendar-day', 'h-10', 'flex', 'items-center', 'justify-center', 'rounded-full', 'cursor-pointer');
+            
+            // Disable past dates and Fridays (day 5)
+            const isPastDate = date < new Date(today.setHours(0, 0, 0, 0));
+            const isFriday = date.getDay() === 5; // Friday is 5 in JS (0 is Sunday)
+            
+            if (isPastDate || isFriday) {
+                dayElement.classList.add('text-gray-300', 'bg-gray-100', 'cursor-not-allowed', 'disabled');
+            } else {
+                dayElement.classList.add('hover:bg-teal-100');
+                
+                dayElement.addEventListener('click', () => {
+                    // Remove selected class from all days
+                    document.querySelectorAll('.calendar-day').forEach(el => {
+                        el.classList.remove('bg-teal-600', 'text-white');
+                    });
+                    
+                    // Add selected class to clicked day
+                    dayElement.classList.add('bg-teal-600', 'text-white');
+                    
+                    // Store selected date
+                    const selectedDate = new Date(currentYear, currentMonth, day);
+                    const formattedDate = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
+                    selectedDateInput.value = formattedDate;
+                    
+                    // Generate time slots for the selected date
+                    generateTimeSlots(selectedDate);
+                });
+            }
+            
+            calendarDays.appendChild(dayElement);
+        }
+    }
+    
+    function generateTimeSlots(date) {
+        timeSlots.innerHTML = '';
+        selectedTimeInput.value = '';
+        
+        // Generate time slots from 9:00 to 17:00 with 30-minute intervals
+        const startHour = 9;
+        const endHour = 17;
+        
+        for (let hour = startHour; hour < endHour; hour++) {
+            for (let minute = 0; minute < 60; minute += 30) {
+                if (hour === endHour - 1 && minute === 30) continue; // Skip 16:30
+                
+                const timeString = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                
+                const timeSlot = document.createElement('button');
+                timeSlot.type = 'button';
+                timeSlot.textContent = timeString;
+                timeSlot.classList.add('time-slot', 'py-2', 'border', 'border-gray-300', 'rounded', 'text-center', 'hover:bg-teal-100', 'transition');
+                
+                // Randomly disable some time slots to simulate availability
+                const isAvailable = Math.random() > 0.3;
+                if (!isAvailable) {
+                    timeSlot.classList.add('text-gray-300', 'bg-gray-100', 'cursor-not-allowed', 'disabled');
+                } else {
+                    timeSlot.addEventListener('click', () => {
+                        // Remove selected class from all time slots
+                        document.querySelectorAll('.time-slot').forEach(el => {
+                            el.classList.remove('bg-teal-600', 'text-white');
+                        });
+                        
+                        // Add selected class to clicked time slot
+                        timeSlot.classList.add('bg-teal-600', 'text-white');
+                        
+                        // Store selected time
+                        selectedTimeInput.value = timeString;
+                    });
+                }
+                
+                timeSlots.appendChild(timeSlot);
+            }
+        }
+    }
+    
+    // Initialize calendar weekdays and calendar
+    updateCalendarWeekdays();
+    renderCalendar();
+    
+    // Previous month button
+    prevMonthBtn.addEventListener('click', () => {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        renderCalendar();
+    });
+    
+    // Next month button
+    nextMonthBtn.addEventListener('click', () => {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        renderCalendar();
+    });
+    
+    // Form submission
+    const bookingForm = document.getElementById('bookingForm');
+    const successModal = document.getElementById('successModal');
+    const closeSuccessModal = document.getElementById('closeSuccessModal');
+    const bookingDetails = document.getElementById('bookingDetails');
+    
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Validate form
+        if (!selectedDateInput.value || !selectedTimeInput.value) {
+            alert(currentLanguage === 'ar' ? 'الرجاء اختيار التاريخ والوقت' : 
+                  currentLanguage === 'fr' ? 'Veuillez sélectionner la date et l\'heure' : 
+                  'Please select date and time');
+            return;
+        }
+        
+        // Get form data
+        const formData = new FormData(bookingForm);
+        const fullName = formData.get('fullName');
+        const phone = formData.get('phone');
+        const email = formData.get('email');
+        const service = formData.get('service');
+        const date = new Date(selectedDateInput.value);
+        const time = selectedTimeInput.value;
+        const notes = formData.get('notes');
+        
+        // Format date in current language
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = date.toLocaleDateString(
+            currentLanguage === 'ar' ? 'ar-DZ' : 
+            currentLanguage === 'fr' ? 'fr-FR' : 'en-US', 
+            options
+        );
+        
+        // Get labels based on current language
+        const nameLabel = translations[currentLanguage]["name-label"];
+        const phoneLabel = translations[currentLanguage]["phone-label"];
+        const emailLabel = translations[currentLanguage]["email-label"];
+        const serviceLabel = translations[currentLanguage]["service-label"];
+        const dateLabel = translations[currentLanguage]["date-label"];
+        const timeLabel = translations[currentLanguage]["time-label"];
+        const notesLabel = translations[currentLanguage]["notes-label"];
+        
+        // Display booking details
+        bookingDetails.innerHTML = `
+            <p class="mb-2"><strong>${nameLabel}</strong> ${fullName}</p>
+            <p class="mb-2"><strong>${phoneLabel}</strong> ${phone}</p>
+            ${email ? `<p class="mb-2"><strong>${emailLabel}</strong> ${email}</p>` : ''}
+            <p class="mb-2"><strong>${serviceLabel}</strong> ${service}</p>
+            <p class="mb-2"><strong>${dateLabel}</strong> ${formattedDate}</p>
+            <p class="mb-2"><strong>${timeLabel}</strong> ${time}</p>
+            ${notes ? `<p><strong>${notesLabel}</strong> ${notes}</p>` : ''}
+        `;
+        
+        // Hide booking modal and show success modal
+        bookingModal.classList.add('hidden');
+        successModal.classList.remove('hidden');
+        
+        // Reset form
+        bookingForm.reset();
+        selectedDateInput.value = '';
+        selectedTimeInput.value = '';
+        document.querySelectorAll('.calendar-day').forEach(el => {
+            el.classList.remove('bg-teal-600', 'text-white');
+        });
+        
+        const selectDateFirstText = translations[currentLanguage]["select-date-first"];
+        timeSlots.innerHTML = `<p class="col-span-full text-gray-500 text-center">${selectDateFirstText}</p>`;
+    });
+    
+    closeSuccessModal.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Close success modal when clicking outside
+    successModal.addEventListener('click', (e) => {
+        if (e.target === successModal) {
+            successModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    });
+</script>
+</body>
+</html>
